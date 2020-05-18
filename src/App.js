@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
-import './App.css';
-import Person from './Person/Person';
+// import Navbar from './Components/Navbar1';
+// import Sidebar from './Components/Sidebar2';
+// import Footer from './Components/Footer4';
+import Login from './Pages/Login';
+
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello React..!</h1>
-      <Person name="jeni" agge="20 "/>
+    <div>
+      {/* <Navbar/> */}
+      {/* <Sidebar/> */}
+      <Login/>
+      {/* <Footer/> */}
     </div>
   );
 }
