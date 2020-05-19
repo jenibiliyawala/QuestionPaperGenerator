@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-
 class Login extends Component{
     render(){
         return(
-            <div style={{backgroundImage:"./Assets/dist/img/LoginBackground.jpg", width:"100%", height:"100vh" ,overflow:"auto"}}>
+            <div style={{height:'100vh', backgroundImage:`url("Assets/dist/img/LoginBackground.jpg")`, backgroundRepeat:'no-repeat', backgroundAttachment:'fixed', backgroundSize:'cover'}}>
                 <div className="login-box" style={{margin:"auto", height:"100%"}}>
-                    <div style={{ verticalAlign:"middle"}}>
+                    <div style={{ paddingTop:"20vh"}}>
                         <div className="login-logo">
-                            <a href="../../index2.html"><b>Admin</b>LTE</a>
+                            <img src="Assets/dist/img/daiict.png" style={{ height:'3.2em',paddingBottom:'0.7em'}}/>
+                            <a href="https://www.daiict.ac.in/"> <font style={{fontSize:'1.5em', fontWeight:'bold'}}>DAIICT</font></a>
                         </div>
                         {/* /.login-logo */}
                         <div className="card">
@@ -15,7 +15,14 @@ class Login extends Component{
                                 <p className="login-box-msg">Sign in to start your session</p>
                                 <form action="../../index3.html" method="post">
                                     <div className="input-group mb-3">
-                                        <input type="email" className="form-control" placeholder="Email"/>
+                                        <input 
+                                            type="email" 
+                                            className="form-control" 
+                                            name="email"
+                                            required
+                                            placeholder="Email"
+                                            v-model="email"
+                                        />
                                         <div className="input-group-append">
                                             <div className="input-group-text">
                                                 <span className="fas fa-envelope"></span>
@@ -23,7 +30,18 @@ class Login extends Component{
                                         </div>
                                     </div>
                                     <div className="input-group mb-3">
-                                        <input type="password" className="form-control" placeholder="Password"/>
+                                        <input 
+                                            type="password" 
+                                            className="form-control" 
+                                            name="password"
+                                            required
+                                            v-model="pwd"
+                                            maxlength="30"
+                                            minlength="8"
+                                            pattern="[a-zA-Z0-9_@$~.,()=+*^%#!\/?><-]*"
+                                            title="Only Numbers,characters and (_@$~.,()=+*^%#!\/?><-) are allowed"
+                                            placeholder="Password"
+                                        />
                                         <div className="input-group-append">
                                             <div className="input-group-text">
                                                 <span className="fas fa-lock"></span>
@@ -33,7 +51,13 @@ class Login extends Component{
                                     <div className="row">
                                         <div className="col-8">
                                             <div className="icheck-primary">
-                                                <input type="checkbox" id="remember"/>
+                                                <input 
+                                                    type="checkbox" 
+                                                    name="rememberme"
+                                                    id="remember"
+                                                    v-model="checkbox1"
+                                                    value="yes"
+                                                />
                                                 <label htmlFor="remember">
                                                     Remember Me
                                                 </label>
@@ -46,17 +70,6 @@ class Login extends Component{
                                         {/* /.col */}
                                     </div>
                                 </form>
-    {/* 
-                                <div className="social-auth-links text-center mb-3">
-                                    <p>- OR -</p>
-                                    <a href="#" className="btn btn-block btn-primary">
-                                        <i className="fab fa-facebook mr-2"></i> Sign in using Facebook
-                                    </a>
-                                    <a href="#" className="btn btn-block btn-danger">
-                                        <i className="fab fa-google-plus mr-2"></i> Sign in using Google+
-                                    </a>
-                                </div> */}
-                                {/* /.social-auth-links  */}
 
                                 <p className="mb-1">
                                     <a href="forgot-password.html">I forgot my password</a>

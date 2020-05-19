@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 // import Sidebar from './Components/Sidebar2';
 // import Footer from './Components/Footer4';
 import Login from './Pages/Login';
+// import Temp from './Pages/Temp';
+// import '../public/Assets/dist/css/custom/Login.css';
 
 
 function App() {
@@ -11,6 +13,7 @@ function App() {
       {/* <Navbar/> */}
       {/* <Sidebar/> */}
       <Login/>
+      {/* <Temp/> */}
       {/* <Footer/> */}
     </div>
   );
