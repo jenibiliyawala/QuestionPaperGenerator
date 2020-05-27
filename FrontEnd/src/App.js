@@ -1,53 +1,45 @@
 import React, {Component} from 'react';
-import Navbar from './Components/Navbar1';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
- import Sidebar from './Components/Sidebar2';
- import Dashboard from './Pages/Dashboard';
- import Home from './Pages/Home';
 
-// import Footer from './Components/Footer4';
-import Login from './Pages/Login';
-import Register from './Pages/Register';
-// import Temp from './Pages/Temp';
-// import '../public/Assets/dist/css/custom/Login.css';
+import Dashboard from './Pages/faculty/Dashboard';
+import Home from './Pages/faculty/Home';
+
+import Login from './Pages/faculty/Login';
+import Temp from './Pages/faculty/Temp';
 
 export default class App extends Component{
-
-constructor()
-{
-  super();
-  this.state={
-    loggedInStatus: "NOT_LOGGED_IN",
-    user :{}
+  constructor()
+  {
+    super();
+    this.state={
+      loggedInStatus: "NOT_LOGGED_IN",
+      user :{}
+    }
   }
-}
-
   render()
   {
     return(
-<div className="app">
-  <BrowserRouter>
-  <Switch>
-    <Route exact path={"/"} 
-    render={props=>(
-      <Home {...props} loggedInStatus={this.state.loggedInStatus}/>
-    )}
-    />
-    <Route
-     exact
-      path={"/dashboard"}
-      render={props => (
-      <Dashboard {...props} loggedInStatus={this.state.loggedInStatus} />
-      )}
-      />
+      <div className="app">
+        <BrowserRouter>
+          <Switch>
+            {/* <Route exact path={"/"} 
+              render={props=>(
+                <Home {...props} loggedInStatus={this.state.loggedInStatus}/>
+              )}
+            /> */}
+            <Route exact path={"/"} component={Dashboard} />
+            <Route path={"/login"} component={Login} />
+            <Route path={"/Dashboard"} component={Dashboard}/>
+            <Route path={"/home"} component={Home} />
+            <Route path={"/contact"} component={Temp} />
 
-  </Switch>
-  </BrowserRouter>
+          </Switch>
+        </BrowserRouter>
 
-</div>
+      </div>
 
-    );
-  }
+      );
+    }
 }
 
 

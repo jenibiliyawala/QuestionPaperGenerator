@@ -1,20 +1,40 @@
 import React, {Component} from 'react';
-
+import {Link, Redirect} from "react-router-dom";
 class Navbar1 extends React.Component{
+    
+    // Login redirect code starts
+    state = {
+        redirect: false
+    }
+    logInFunction = () => {
+        this.setState({
+            redirect: true
+        })
+    }
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/login' />
+        }
+    }
+    // login redirect code ends
+    
     render(){
         return(
             <div>
-		<nav className="main-header navbar navbar-expand navbar-white navbar-light">
+                {this.renderRedirect()} {/*called to initialize login function state */}
+        		<nav className="main-header navbar navbar-expand navbar-white navbar-light">
                     {/* Left navbar links */}
                     <ul className="navbar-nav">
                     <li className="nav-item">
                         <a className="nav-link" data-widget="pushmenu" href="#" role="button"><i className="fas fa-bars"></i></a>
                     </li>
                     <li className="nav-item d-none d-sm-inline-block">
-                        <a href="#" className="nav-link">Home</a>
+                        <Link to={"/home"} activestyle={{color:'red'}} className="nav-link">Home</Link>
+                        {/* <a href="#" className="nav-link">Home</a> */}
                     </li>
                     <li className="nav-item d-none d-sm-inline-block">
-                        <a href="#" className="nav-link">Contact</a>
+                        <Link to={"/contact"} activestyle={{color:'red'}} className="nav-link">Contact</Link>
+                        {/* <a href="#" className="nav-link">Contact</a> */}
                     </li>
                     </ul>
 
@@ -32,7 +52,13 @@ class Navbar1 extends React.Component{
 
                     {/* Right navbar links */}
                     <ul className="navbar-nav ml-auto">
-                    {/* Messages Dropdown Menu */}
+                    <li className="nav-item">
+                            <button onClick={this.logInFunction} type="button" className="btn btn-block btn-success">Login</button>
+                        </li>
+                        <li className="nav-item">
+                            <button onClick={this.logOutFunction} type="button" className="btn btn-block btn-danger">Logout</button>
+                        </li>
+                        {/* Messages Dropdown Menu */}
                         <li className="nav-item dropdown">
                             <a className="nav-link" data-toggle="dropdown" href="#">
                                 <i className="far fa-comments"></i>
@@ -117,11 +143,11 @@ class Navbar1 extends React.Component{
                                 <a href="#" className="dropdown-item dropdown-footer">See All Notifications</a>
                             </div>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <a className="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                             <i className="fas fa-th-large"></i>
                             </a>
-                        </li>
+                        </li> */}
                     </ul>
                 </nav>
             </div>
