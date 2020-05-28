@@ -1,15 +1,19 @@
 import React, {Component} from 'react';
 import service_signin from "../../services/faculty/signin_service";
+
 class Login extends Component{
     constructor(props)
     {
-        super(props)
+        super(props);
+        if(sessionStorage.getItem("email")!=null){
+            this.props.history.push('/dashboard');
+        }
         this.state={
             email:'',
             password:''
-        }
-        this.onChange=this.onChange.bind(this)
-        this.onSubmit=this.onSubmit.bind(this)
+        };
+        // this.onChange=this.onChange.bind(this)
+        // this.onSubmit=this.onSubmit.bind(this)
     }
 
     render(){
@@ -101,13 +105,11 @@ class Login extends Component{
     }
 
     //set value from input form
-    onChange(e)
-    {
+    onChange = (e)=>{
         this.setState({[e.target.name] : e.target.value})
     }
 
-    onSubmit(e)
-    {
+    onSubmit = (e)=>{
         e.preventDefault()
         const data={
             email: this.state.email,
@@ -124,8 +126,8 @@ class Login extends Component{
                     alert("Sorry, You were blocked..!");
                 }
                 else{
-                    //start session
-                    this.props.history.push('/dashboard')
+                    window.sessionStorage.setItem("email",this.state.email);
+                    this.props.history.push('/dashboard');
                 }
             })
             .catch((e) => {

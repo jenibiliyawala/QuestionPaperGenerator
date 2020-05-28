@@ -1,17 +1,49 @@
 import React, {Component} from 'react';
+import service_profile from "../services/faculty/profile_service";
 
 class Sidebar2 extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            firstName:"",
+            lastName:"",
+            facultyID:0,
+            status:0,
+            profileImage:"default_profile.png",
+            contactNo:""
+        }
+    }
+    componentDidMount(){
+        const data={
+            email: sessionStorage.getItem("email")
+        }    
+        service_profile
+            .facultyDetail(data)
+            .then((res) => {
+                this.setState({
+                    firstName:res.data[0].FirstName,
+                    lastName:res.data[0].LastName,
+                    facultyID:res.data[0].FacultyID,
+                    status:res.data[0].Status,
+                    profileImage:res.data[0].Image,
+                    contactNo:res.data[0].ContactNo
+                });
+            })
+            .catch((e) => {
+                alert("Some error occured getting faculty details"+e);
+            });
+    }    
     render(){
         return(
             <div>
-		        <aside className="main-sidebar sidebar-dark-primary elevation-4">
+                <aside className="main-sidebar sidebar-dark-primary elevation-4">
                     {/* <!-- Brand Logo --> */}
-                    <a href="#" className="brand-link">
-                        <img src="Assets/dist/img/AdminLTELogo.png"
+                    <a href="https://www.daiict.ac.in/" className="brand-link">
+                        <img src="http://localhost:3000/Assets/dist/img/daiict.png"
                             alt="AdminLTE Logo"
                             className="brand-image img-circle elevation-3"
                             style={{opacity: ".8"}}/>
-                        <span className="brand-text font-weight-light">AdminLTE 3</span>
+                        <span className="brand-text font-weight-light">&nbsp;&nbsp;<b>DAIICT</b></span>
                     </a>
 
                     {/* <!-- Sidebar --> */}
@@ -19,10 +51,10 @@ class Sidebar2 extends React.Component{
                     {/* <!-- Sidebar user panel (optional) --> */}
                         <div className="user-panel mt-3 pb-3 mb-3 d-flex">
                             <div className="image">
-                                <img src="Assets/dist/img/user2-160x160.jpg" className="img-circle elevation-2" alt="User Image"/>
+                                <img src={"http://localhost:8081/assets/images/Faculty/" + this.state.profileImage} className="img-circle elevation-2" alt="User Image"/>
                             </div>
                             <div className="info">
-                                <a href="#" className="d-block">Alexander Pierce</a>
+                                <a href="#" className="d-block">{this.state.firstName} {this.state.lastName}</a>
                             </div>
                         </div>
                         {/* <!-- Sidebar Menu --> */}
@@ -563,6 +595,11 @@ class Sidebar2 extends React.Component{
             </div>
         )
     }
+
+    //get faculty details
+    // getProfileDetails = (e) => {
+    //     // e.preventDefault()
+    // }
 }
 
 export default Sidebar2;
