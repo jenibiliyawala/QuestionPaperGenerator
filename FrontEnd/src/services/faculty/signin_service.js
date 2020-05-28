@@ -1,7 +1,7 @@
 import http from "../../http-common";
 
 class signIn {
-  sin(data) {
+  sin(data){
     return http.post("/signin",data);
   }
 }
