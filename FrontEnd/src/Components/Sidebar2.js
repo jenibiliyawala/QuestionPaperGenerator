@@ -17,28 +17,29 @@ class Sidebar2 extends React.Component{
         const data={
             email: sessionStorage.getItem("email")
         }    
-        service_profile
-            .facultyDetail(data)
-            .then((res) => {
-                this.setState({
-                    firstName:res.data[0].FirstName,
-                    lastName:res.data[0].LastName,
-                    facultyID:res.data[0].FacultyID,
-                    status:res.data[0].Status,
-                    profileImage:res.data[0].Image,
-                    contactNo:res.data[0].ContactNo
+        if(sessionStorage.getItem("email")!=null){
+            service_profile
+                .facultyDetail(data)
+                .then((res) => {
+                    this.setState({
+                        firstName:res.data[0].FirstName,
+                        lastName:res.data[0].LastName,
+                        facultyID:res.data[0].FacultyID,
+                        status:res.data[0].Status,
+                        profileImage:res.data[0].Image,
+                        contactNo:res.data[0].ContactNo
+                    });
+                })
+                .catch((e) => {
+                    alert("Some error occured getting faculty details"+e);
                 });
-            })
-            .catch((e) => {
-                alert("Some error occured getting faculty details"+e);
-            });
+        }
     }    
     render(){
         return(
             <div>
                 <aside className="main-sidebar sidebar-dark-primary elevation-4">
-                    {/* <!-- Brand Logo --> */}
-                    <a href="https://www.daiict.ac.in/" className="brand-link">
+                    <a href="https://www.daiict.ac.in/" className="brand-link navbar-navy">
                         <img src="http://localhost:3000/Assets/dist/img/daiict.png"
                             alt="AdminLTE Logo"
                             className="brand-image img-circle elevation-3"
@@ -46,22 +47,17 @@ class Sidebar2 extends React.Component{
                         <span className="brand-text font-weight-light">&nbsp;&nbsp;<b>DAIICT</b></span>
                     </a>
 
-                    {/* <!-- Sidebar --> */}
                     <div className="sidebar">
-                    {/* <!-- Sidebar user panel (optional) --> */}
                         <div className="user-panel mt-3 pb-3 mb-3 d-flex">
                             <div className="image">
                                 <img src={"http://localhost:8081/assets/images/Faculty/" + this.state.profileImage} className="img-circle elevation-2" alt="User Image"/>
                             </div>
                             <div className="info">
-                                <a href="#" className="d-block">{this.state.firstName} {this.state.lastName}</a>
+                                <a href="http://localhost:3000/profile" className="d-block">{this.state.firstName} {this.state.lastName}</a>
                             </div>
                         </div>
-                        {/* <!-- Sidebar Menu --> */}
                         <nav className="mt-2">
                             <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                            {/* <!-- Add icons to the links using the .nav-icon className
-                                with font-awesome or any other icon font library --> */}
                                 <li className="nav-item has-treeview">
                                     <a href="#" className="nav-link">
                                         <i className="nav-icon fas fa-tachometer-alt"></i>
@@ -588,18 +584,11 @@ class Sidebar2 extends React.Component{
                                 </li>
                             </ul>
                         </nav>
-                        {/* <!-- /.sidebar-menu --> */}
                     </div>
-                    {/* <!-- /.sidebar --> */}
                 </aside>
             </div>
         )
     }
-
-    //get faculty details
-    // getProfileDetails = (e) => {
-    //     // e.preventDefault()
-    // }
 }
 
 export default Sidebar2;
