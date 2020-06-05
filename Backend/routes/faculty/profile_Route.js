@@ -45,6 +45,7 @@ router.post('/profile/uploadImage', fileupload, (req, res, next) => {
         });
     };
 });
+
 //end
 
 router.post('/profile', (req, res, next) => {
