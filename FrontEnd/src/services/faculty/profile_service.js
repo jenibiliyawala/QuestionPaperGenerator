@@ -4,11 +4,10 @@ class signIn {
   facultyDetail(data){
     return http.post("/profile",data);
   }
-  updatedFaculty(data)
-  {
-    return http.put("/profile",data);
+  updatedFaculty(data){
+    return http.post("/profile/updateProfile",data);
   }
-  uploadImage(data) {
+  uploadImage(data){
     return http.post("/profile/uploadImage", data);
   }
 }

@@ -42,6 +42,9 @@
     <!--LoginPage icheck bootstrap -->
     <link rel="stylesheet" href="Assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 
+    <!--Page alert SweetAlert2 -->
+    <link rel="stylesheet" href="Assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  
     <!-- Template imports ends -->
   </head>
   <body class="sidebar-collapse">
@@ -70,6 +73,9 @@
     <script src="Assets/dist/js/demo.js"></script>
     <!-- Template imports ends -->
 
+    <!-- Page alert SweetAlert2 -->
+    <script src="Assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+
     <!-- To init profile page js starts -->
     <script type="text/javascript">
       $(document).ready(function () {
@@ -78,5 +84,36 @@
     </script>
     <!-- To init profile page js ends -->
       
+    <!-- to show error starts -->
+    <script type="text/javascript">
+      $(function() {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000
+        });
+    
+        $('.swalDefaultSuccess').click(function(e) {
+          Toast.fire({
+            icon: 'success',
+            title: e.target.value
+          })
+        });
+        $('.swalDefaultInfo').click(function(e) {
+          Toast.fire({
+            icon: 'info',
+            title: e.target.value
+          })
+        });
+        $('.swalDefaultError').click(function(e) {
+          Toast.fire({
+            icon: 'error',
+            title: e.target.value
+          })
+        });
+      });
+    </script>
+    <!-- to show error ends -->
   </body>
 </html>

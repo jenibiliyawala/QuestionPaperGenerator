@@ -14,8 +14,10 @@ class Home extends React.Component{
             facultyID:0,
             status:0,
             fileName:"",
-            contactNo:""
+            contactNo:"",
+            newImageName:"",
         }
+        this.fileInput = React.createRef();
     }
    
     componentDidMount(){
@@ -36,85 +38,22 @@ class Home extends React.Component{
                     });
                 })
                 .catch((e) => {
-                    alert("Some error occured getting faculty details"+e);
+                    var elem = document.getElementById("errorButton");
+                    elem.value="&nbsp;&nbsp;Some error occured getting faculty details"+e;
+                    elem.click();
                 });
         }
     }
 
-    onChange = e => {
-        switch (e.target.name) {
-            case 'myimage':
-                if(e.target.files.length > 0) {
-                    this.setState({ fileName: e.target.files[0].name });
-                }
-                break;
-            default:
-                this.setState({ [e.target.name]: e.target.value });
-        }
-    };
-
-    sendFile = (e) => {
-        e.preventDefault()
-        const formData = new FormData();
-        formData.append("file", this.state.myimage);
-        service_profile
-            .uploadImage(formData)
-            .then(res => {
-                alert(formData.getAll)
-                let response = res.data;    
-                if (response.result === 1) {
-                    this.error = "Image Uploaded";
-                    this.profilePic = response.name;
-                    this.uploadStatus = 1;
-                } 
-                else {
-                    this.uploadStatus = 0;
-                    this.error = "Error occured!!!";
-                    alert("image upload failed.. ")
-                }
-            })
-            .catch((e) => {
-                alert("image not uploaded "+e);
-            });
-    }
-  
-    onSubmit = (e)=>{
-        e.preventDefault()
-        const data={
-            email: sessionStorage.getItem("email"),
-            firstname: this.state.firstname,
-            lastname:this.state.lastname,
-            contactno:this.state.contactno,
-            password:this.state.password,
-            fileName:this.state.myimage,
-        }
-        service_profile
-            .updatedFaculty(data)
-            .then((res) =>
-            {
-                var resdata = res.data;
-                if (resdata.result == -1) {
-                    alert("Invalid..!");
-                }
-                else{
-                    alert("Profile updated successfully..!");
-                    this.props.history.push('/dashboard');
-                }   
-            })
-            .catch((e) => {
-                alert("Some error occured updating faculty"+e);
-            });
-    }
-
     render(){
-        const { fileName } = this.state;
-        let file = null;
         return (
             <div>
                 <Navbar/>
                 <Sidebar/>
 
                 <div className="content-wrapper">
+                    <button type="button" className="btn btn-danger swalDefaultError" value="&nbsp;&nbsp;Error" id="errorButton" style={{display:"none"}}></button>
+                    <button type="button" className="btn btn-success swalDefaultSuccess" value="&nbsp;&nbsp;Successfull" id="successButton" style={{display:"none"}}></button>
 
                     <section className="content-header">
                         <div className="container-fluid">
@@ -140,7 +79,7 @@ class Home extends React.Component{
                                         <div className="card-header">
                                             <h3 className="card-title">Quick Example</h3>
                                         </div>
-                                        {/* <form role="form" onSubmit={this.onSubmit}> */}
+                                        <form role="form" onSubmit={this.onSubmit}>
                                             <div className="card-body">
                                                 <div className="form-group">
                                                     <label htmlFor="exampleInputFirstName1">First name</label>
@@ -148,7 +87,20 @@ class Home extends React.Component{
                                                         <div className="input-group-prepend">
                                                             <span className="input-group-text"><i className="fas fa-user-tie"></i></span>
                                                         </div>
-                                                        <input type="text" className="form-control" id="exampleInputFirstName1" placeholder="Enter first name" name="firstname" value={this.state.firstname || ''} onChange={this.onChange.bind(this)}/>
+                                                        <input 
+                                                            type="text" 
+                                                            className="form-control" 
+                                                            id="exampleInputFirstName1" 
+                                                            placeholder="Enter first name" 
+                                                            name="firstname" 
+                                                            required
+                                                            minLength="2"
+                                                            maxLength="100"
+                                                            pattern="[a-zA-Z]*"
+                                                            title="Only Characters are allowed"
+                                                            value={this.state.firstname || ''} 
+                                                            onChange={this.onChange.bind(this)}
+                                                        />
                                                     </div>
                                                 </div>
                                                 <div className="form-group">
@@ -157,7 +109,19 @@ class Home extends React.Component{
                                                         <div className="input-group-prepend">
                                                             <span className="input-group-text"><i className="fas fa-user"></i></span>
                                                         </div>
-                                                        <input type="text" className="form-control" id="exampleInputLastName1" placeholder="Enter last name" name="lastname" value={this.state.lastname} onChange={this.onChange.bind(this)}/>
+                                                        <input 
+                                                            type="text" 
+                                                            className="form-control" 
+                                                            id="exampleInputLastName1" 
+                                                            required
+                                                            pattern="[a-zA-Z]*"
+                                                            title="Only Characters are allowed"
+                                                            minLength="2"
+                                                            maxLength="100"
+                                                            placeholder="Enter last name" 
+                                                            name="lastname" value={this.state.lastname} 
+                                                            onChange={this.onChange.bind(this)}
+                                                        />
                                                     </div>
                                                 </div>
                                                 <div className="form-group">
@@ -166,10 +130,23 @@ class Home extends React.Component{
                                                         <div className="input-group-prepend">
                                                             <span className="input-group-text"><i className="fas fa-phone-alt"></i></span>
                                                         </div>
-                                                        <input type="text" className="form-control" id="exampleInputContactNo1" placeholder="Enter contact no" name="contactno" value={this.state.contactno} onChange={this.onChange.bind(this)}/>
+                                                        <input 
+                                                            type="text" 
+                                                            className="form-control" 
+                                                            id="exampleInputContactNo1" 
+                                                            placeholder="Enter contact no" 
+                                                            name="contactno" 
+                                                            maxLength="10"
+                                                            required
+                                                            pattern="[0-9]*"
+                                                            title="Only Numbers are allowed"
+                                                            minLength="10"
+                                                            value={this.state.contactno} 
+                                                            onChange={this.onChange.bind(this)}
+                                                        />
                                                     </div>
                                                 </div>
-                                                <form enctype="multipart/form-data" onSubmit={this.sendFile}> {/* @submit.prevent="sendFile"> */}
+                                                <form encType="multipart/form-data" onSubmit={this.sendFile}>
                                                     <div className="form-group">
                                                         <label htmlFor="exampleInputFile">Change profile picture</label>
                                                         <div className="input-group mb-3">
@@ -177,11 +154,16 @@ class Home extends React.Component{
                                                                 <span className="input-group-text"><i className="fas fa-image"></i></span>
                                                             </div>
                                                             <div className="custom-file">
-                                                                <input type="file" className="custom-file-input" id="exampleInputFile" name="myimage" onChange={(e)=>this.onChange(e)}/>
+                                                                <input 
+                                                                    type="file"
+                                                                    className="custom-file-input" 
+                                                                    ref={this.fileInput}
+                                                                    accept="image/png, image/jpeg, image/jpg"
+                                                                />
                                                                 <label className="custom-file-label" htmlFor="exampleInputFile">Choose image</label>
                                                             </div>
                                                             <div className="input-group-append">
-                                                                <button type="submit" className="input-group-text" id="profileImage" name="Upload" value="Upload">Upload</button>
+                                                                <button className="input-group-text">Upload</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -192,29 +174,126 @@ class Home extends React.Component{
                                                         <div className="input-group-prepend">
                                                             <span className="input-group-text"><i className="fas fa-key"></i></span>
                                                         </div>
-                                                        <input type="password" name="password"  className="form-control" id="exampleInputPassword1" placeholder="Enter password" onChange={this.onChange.bind(this)}/>
+                                                        <input 
+                                                            type="password" 
+                                                            name="password"  
+                                                            className="form-control" 
+                                                            id="exampleInputPassword1" 
+                                                            maxLength="30"
+                                                            minLength="8"
+                                                            required
+                                                            pattern="[a-zA-Z0-9_@$~.,()=+*^%#!\/?><-]*"
+                                                            title="Only Numbers,characters and (_@$~.,()=+*^%#!\/?><-) are allowed"
+                                                            placeholder="Enter password" 
+                                                            onChange={this.onChange.bind(this)}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="card-footer">
                                                 <button type="submit" className="btn btn-primary">Update</button>
                                             </div>
-                                        {/* </form> */}
+                                        </form>
                                     </div>
                                 </div>
                             </div>    
                         </div>    
                     </section>
-
+                    
                 </div>
                 
                 <Footer/>
+
             </div>
         );
     }
-    //set value from input form
-    onChange = (e)=>{
-        this.setState({[e.target.name] : e.target.value})
+    
+    //Image upload
+    sendFile = (e) => {
+        e.preventDefault()
+        const formData = new FormData();
+        formData.append("file", this.fileInput.current.files[0]);
+        service_profile
+            .uploadImage(formData)
+            .then(res => {
+                // alert(formData.getAll)
+                let response = res.data;    
+                if (response.result === 1) {
+                    this.error = "Image Uploaded";
+                    this.profilePic = response.name;
+                    this.setState({
+                        fileName:response.name
+                    });
+                    this.uploadStatus = 1;
+                    var elem = document.getElementById("successButton");
+                    elem.value="&nbsp;&nbsp;image uploaded..!";
+                    elem.click();
+                } 
+                else {
+                    this.uploadStatus = 0;
+                    this.error = "Error occured!!!";
+                    var elem = document.getElementById("errorButton");
+                    elem.value="&nbsp;&nbsp;image upload failed..!";
+                    elem.click();
+                }
+            })
+            .catch((e) => {
+                var elem = document.getElementById("errorButton");
+                elem.value="&nbsp;&nbsp;image not uploaded "+e;
+                elem.click();
+            });
     }
+    
+    //Main form submit
+    onSubmit = (e)=>{
+        e.preventDefault()
+        const data={
+            email: sessionStorage.getItem("email"),
+            firstname: this.state.firstname,
+            lastname:this.state.lastname,
+            contactno:this.state.contactno,
+            password:this.state.password,
+            filename:this.state.fileName,
+        }
+        service_profile
+            .updatedFaculty(data)
+            .then((res) =>
+            {
+                let resdata = res.data;
+                if (resdata.result == -1) {
+                    var elem = document.getElementById("errorButton");
+                    elem.value="&nbsp;&nbsp;Invalid Password";
+                    elem.click();
+                }
+                else if (resdata.result == -2) {
+                    var elem = document.getElementById("errorButton");
+                    elem.value="&nbsp;&nbsp;Your account is blocked..!";
+                    elem.click();
+                }
+                else{
+                    var elem = document.getElementById("successButton");
+                    elem.value="&nbsp;&nbsp;Profile updated successfully..!";
+                    elem.click();
+                    this.props.history.push('/dashboard');
+                }   
+            })
+            .catch((e) => {
+                alert("Some error occured updating faculty"+e);
+            });
+    }
+
+    //set value from input form
+    onChange = e => {
+        switch (e.target.name) {
+            case 'myimage':
+                if(e.target.files.length > 0) {
+                    this.setState({ newImageName: e.target.files[0].name });
+                }
+                break;
+            default:
+                this.setState({ [e.target.name]: e.target.value });
+        }
+    };
+    
 }
 export default Home;

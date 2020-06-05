@@ -22,5 +22,4 @@ app.use(facultyDetail);
 //for getting images and other resources
 app.use(express.static(__dirname));
 
-app.listen(process.env.PORT || 8081)
-
+app.listen(process.env.PORT || 8081);

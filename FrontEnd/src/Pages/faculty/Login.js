@@ -12,13 +12,13 @@ class Login extends Component{
             email:'',
             password:''
         };
-        // this.onChange=this.onChange.bind(this)
-        // this.onSubmit=this.onSubmit.bind(this)
     }
 
     render(){
         return(
             <div style={{height:'100vh', backgroundImage:`url("Assets/dist/img/LoginBackground.jpg")`, backgroundRepeat:'no-repeat', backgroundAttachment:'fixed', backgroundSize:'cover'}}>
+                <button type="button" className="btn btn-danger swalDefaultError" value="&nbsp;&nbsp;Error" id="errorButton" style={{display:"none"}}></button>
+                <button type="button" className="btn btn-success swalDefaultSuccess" value="&nbsp;&nbsp;Successfull" id="successButton" style={{display:"none"}}></button>
                 <div className="login-box" style={{margin:"auto", height:"100%"}}>
                     <div style={{ paddingTop:"20vh"}}>
                         <div className="login-logo">
@@ -120,12 +120,19 @@ class Login extends Component{
             .then((res) => {
                 var resdata = res.data;
                 if (resdata.result == -1) {
-                    alert("Invalid Username or Password..!");
+                    var elem = document.getElementById("errorButton");
+                    elem.value="&nbsp;&nbsp;Invalid Username or Password..!";
+                    elem.click();
                 }
                 else if (resdata.result == -2) {
-                    alert("Sorry, You were blocked..!");
+                    var elem = document.getElementById("errorButton");
+                    elem.value="&nbsp;&nbsp;Sorry, You were blocked..!";
+                    elem.click();
                 }
                 else{
+                    var elem = document.getElementById("successButton");
+                    elem.value="&nbsp;&nbsp;Welcome "+this.state.email;
+                    elem.click();
                     window.sessionStorage.setItem("email",this.state.email);
                     this.props.history.push('/dashboard');
                 }
