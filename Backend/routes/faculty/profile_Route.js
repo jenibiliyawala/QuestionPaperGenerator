@@ -43,6 +43,7 @@ router.post('/profile/uploadImage', fileupload, (req, res, next) => {
             result: 1,
             name: image.filename
         });
+        
     };
 });
 
