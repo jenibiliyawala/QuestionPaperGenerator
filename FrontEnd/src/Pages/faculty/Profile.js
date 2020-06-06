@@ -15,7 +15,6 @@ class Home extends React.Component{
             status:0,
             fileName:"",
             contactNo:"",
-            newImageName:"",
         }
         this.fileInput = React.createRef();
     }
@@ -79,8 +78,32 @@ class Home extends React.Component{
                                         <div className="card-header">
                                             <h3 className="card-title">Quick Example</h3>
                                         </div>
+                                        <form encType="multipart/form-data" onSubmit={this.sendFile}>
+                                            <div className="card-body" style={{paddingBottom:'0px'}}>
+                                                <div className="form-group">
+                                                    <label htmlFor="exampleInputFile">Change profile picture</label>
+                                                    <div className="input-group mb-3">
+                                                        <div className="input-group-prepend">
+                                                            <span className="input-group-text"><i className="fas fa-image"></i></span>
+                                                        </div>
+                                                        <div className="custom-file">
+                                                            <input 
+                                                                type="file"
+                                                                className="custom-file-input" 
+                                                                ref={this.fileInput}
+                                                                accept="image/png, image/jpeg, image/jpg"
+                                                            />
+                                                            <label className="custom-file-label" htmlFor="exampleInputFile">Choose image</label>
+                                                        </div>
+                                                        <div className="input-group-append">
+                                                            <button type="submit" className="input-group-text">Upload</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
                                         <form role="form" onSubmit={this.onSubmit}>
-                                            <div className="card-body">
+                                            <div className="card-body" style={{paddingTop:'0px'}}>
                                                 <div className="form-group">
                                                     <label htmlFor="exampleInputFirstName1">First name</label>
                                                     <div className="input-group mb-3">
@@ -98,7 +121,7 @@ class Home extends React.Component{
                                                             maxLength="100"
                                                             pattern="[a-zA-Z]*"
                                                             title="Only Characters are allowed"
-                                                            value={this.state.firstname || ''} 
+                                                            defaultValue={this.state.firstname || ''} 
                                                             onChange={this.onChange.bind(this)}
                                                         />
                                                     </div>
@@ -119,7 +142,8 @@ class Home extends React.Component{
                                                             minLength="2"
                                                             maxLength="100"
                                                             placeholder="Enter last name" 
-                                                            name="lastname" value={this.state.lastname} 
+                                                            name="lastname" 
+                                                            defaultValue={this.state.lastname || ''} 
                                                             onChange={this.onChange.bind(this)}
                                                         />
                                                     </div>
@@ -141,33 +165,11 @@ class Home extends React.Component{
                                                             pattern="[0-9]*"
                                                             title="Only Numbers are allowed"
                                                             minLength="10"
-                                                            value={this.state.contactno} 
-                                                            onChange={this.onChange.bind(this)}
+                                                            defaultValue={this.state.contactno} 
+                                                            onChange={this.onChange.bind(this) || ''}
                                                         />
                                                     </div>
                                                 </div>
-                                                <form encType="multipart/form-data" onSubmit={this.sendFile}>
-                                                    <div className="form-group">
-                                                        <label htmlFor="exampleInputFile">Change profile picture</label>
-                                                        <div className="input-group mb-3">
-                                                            <div className="input-group-prepend">
-                                                                <span className="input-group-text"><i className="fas fa-image"></i></span>
-                                                            </div>
-                                                            <div className="custom-file">
-                                                                <input 
-                                                                    type="file"
-                                                                    className="custom-file-input" 
-                                                                    ref={this.fileInput}
-                                                                    accept="image/png, image/jpeg, image/jpg"
-                                                                />
-                                                                <label className="custom-file-label" htmlFor="exampleInputFile">Choose image</label>
-                                                            </div>
-                                                            <div className="input-group-append">
-                                                                <button className="input-group-text">Upload</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
                                                 <div className="form-group">
                                                     <label htmlFor="exampleInputPassword1">Enter your password to update details</label>
                                                     <div className="input-group mb-3">
@@ -284,15 +286,7 @@ class Home extends React.Component{
 
     //set value from input form
     onChange = e => {
-        switch (e.target.name) {
-            case 'myimage':
-                if(e.target.files.length > 0) {
-                    this.setState({ newImageName: e.target.files[0].name });
-                }
-                break;
-            default:
-                this.setState({ [e.target.name]: e.target.value });
-        }
+        this.setState({ [e.target.name]: e.target.value});
     };
     
 }

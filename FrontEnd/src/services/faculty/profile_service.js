@@ -1,6 +1,6 @@
 import http from "../../http-common";
 
-class signIn {
+class Profile {
   facultyDetail(data){
     return http.post("/profile",data);
   }
@@ -12,4 +12,4 @@ class signIn {
   }
 }
 
-export default new signIn();
+export default new Profile();

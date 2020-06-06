@@ -1,9 +1,9 @@
 import http from "../../http-common";
 
-class signIn {
+class SignIn {
   sin(data){
     return http.post("/signin",data);
   }
 }
 
-export default new signIn();
+export default new SignIn();
