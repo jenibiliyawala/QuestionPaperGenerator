@@ -2,7 +2,7 @@ import http from "../../http-common";
 
 class ManageCourse {
   courseDetail(data){
-    return http.post("/manageCourse",data);
+    return http.get("/manageCourse",data);
   }
 }
 

@@ -56,7 +56,7 @@ class Sidebar2 extends React.Component{
                                 <a href="http://localhost:3000/profile" className="d-block">{this.state.firstName} {this.state.lastName}</a>
                             </div>
                         </div>
-                        <nav className="mt-2">
+                        {/* <nav className="mt-2"> 
                             <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                                 <li className="nav-item has-treeview">
                                     <a href="#" className="nav-link">
@@ -583,7 +583,7 @@ class Sidebar2 extends React.Component{
                                     </a>
                                 </li>
                             </ul>
-                        </nav>
+                        </nav> */}
                     </div>
                 </aside>
             </div>

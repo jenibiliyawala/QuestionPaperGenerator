@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2020 at 07:59 PM
+-- Generation Time: Jun 07, 2020 at 07:52 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -33,6 +33,7 @@ CREATE TABLE `tblcourse` (
   `CourseCode` varchar(50) NOT NULL,
   `CourseName` varchar(200) NOT NULL,
   `AddedByFacultyID` int(11) NOT NULL,
+  `ProgramID` int(11) NOT NULL,
   `Status` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -40,17 +41,17 @@ CREATE TABLE `tblcourse` (
 -- Dumping data for table `tblcourse`
 --
 
-INSERT INTO `tblcourse` (`CourseID`, `CourseCode`, `CourseName`, `AddedByFacultyID`, `Status`) VALUES
-(1, 'IT623', 'Algorithms & Data Structure', 1, 0),
-(2, 'PC613', 'Communication Skills', 1, 0),
-(3, 'IT615', 'Database Management Systems', 1, 0),
-(4, 'SC612', 'Discrete Mathematics', 1, 0),
-(5, 'IT603', 'Programming (CPP)', 1, 0),
-(6, 'IT694', 'Computer Networks', 1, 0),
-(7, 'IT602', 'OOP & DS', 1, 0),
-(8, 'IT632', 'Software Engineering', 2, 0),
-(9, 'IT628', 'Systems Programming', 2, 0),
-(10, 'IT629', 'Web Programming', 2, 0);
+INSERT INTO `tblcourse` (`CourseID`, `CourseCode`, `CourseName`, `AddedByFacultyID`, `ProgramID`, `Status`) VALUES
+(1, 'IT623', 'Algorithms & Data Structure', 1, 2, 0),
+(2, 'PC613', 'Communication Skills', 1, 1, 1),
+(3, 'IT615', 'Database Management Systems', 1, 1, 0),
+(4, 'SC612', 'Discrete Mathematics', 1, 1, 0),
+(5, 'IT603', 'Programming (CPP)', 1, 1, 0),
+(6, 'IT694', 'Computer Networks', 1, 1, 0),
+(7, 'IT602', 'OOP & DS', 1, 1, 0),
+(8, 'IT632', 'Software Engineering', 2, 1, 0),
+(9, 'IT628', 'Systems Programming', 2, 1, 0),
+(10, 'IT629', 'Web Programming', 2, 1, 0);
 
 -- --------------------------------------------------------
 
