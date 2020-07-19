@@ -5,7 +5,7 @@ import Sidebar from '../../Components/Sidebar2';
 import Footer from '../../Components/Footer4';
 import service_profile from "../../services/faculty/profile_service";
 
-class Home extends React.Component{
+class Profile extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -76,7 +76,7 @@ class Home extends React.Component{
                                 <div className="col-md-10 offset-md-1">
                                     <div className="card card-primary">
                                         <div className="card-header">
-                                            <h3 className="card-title">Quick Example</h3>
+                                            <h3 className="card-title">Faculty details</h3>
                                         </div>
                                         <form encType="multipart/form-data" onSubmit={this.sendFile}>
                                             <div className="card-body" style={{paddingBottom:'0px'}}>
@@ -290,4 +290,4 @@ class Home extends React.Component{
     };
     
 }
-export default Home;
+export default Profile;

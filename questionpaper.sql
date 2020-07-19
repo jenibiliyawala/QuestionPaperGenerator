@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2020 at 07:52 PM
+-- Generation Time: Jul 19, 2020 at 04:35 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -42,16 +42,18 @@ CREATE TABLE `tblcourse` (
 --
 
 INSERT INTO `tblcourse` (`CourseID`, `CourseCode`, `CourseName`, `AddedByFacultyID`, `ProgramID`, `Status`) VALUES
-(1, 'IT623', 'Algorithms & Data Structure', 1, 2, 0),
-(2, 'PC613', 'Communication Skills', 1, 1, 1),
-(3, 'IT615', 'Database Management Systems', 1, 1, 0),
+(1, 'IT623', 'Algorithms & Data Structure', 1, 1, 0),
+(2, 'PC613', 'Communication Skills', 1, 2, 1),
+(3, 'IT615', 'Database Management System', 1, 1, 0),
 (4, 'SC612', 'Discrete Mathematics', 1, 1, 0),
 (5, 'IT603', 'Programming (CPP)', 1, 1, 0),
 (6, 'IT694', 'Computer Networks', 1, 1, 0),
 (7, 'IT602', 'OOP & DS', 1, 1, 0),
 (8, 'IT632', 'Software Engineering', 2, 1, 0),
 (9, 'IT628', 'Systems Programming', 2, 1, 0),
-(10, 'IT629', 'Web Programming', 2, 1, 0);
+(10, 'IT629', 'Web Programming', 2, 1, 0),
+(11, 'IT123', 'Checking COurse', 1, 5, 0),
+(12, 'PC123', 'hello', 1, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -138,7 +140,7 @@ ALTER TABLE `tblprogram`
 -- AUTO_INCREMENT for table `tblcourse`
 --
 ALTER TABLE `tblcourse`
-  MODIFY `CourseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `CourseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tblfaculty`

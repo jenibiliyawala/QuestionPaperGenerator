@@ -43,7 +43,7 @@ class ManageCourse extends Component{
                         <div className="container-fluid">
                             <div className="row mb-2">
                                 <div className="col-sm-6">
-                                    <h1>Manage Course</h1>
+                                    <h1>Manage Course &nbsp;&nbsp;&nbsp;<Link to={"/insertCourse"}><button type="submit" className="btn btn-primary">Insert New</button></Link></h1>
                                 </div>
                                 <div className="col-sm-6">
                                     <ol className="breadcrumb float-sm-right">
@@ -81,7 +81,7 @@ class ManageCourse extends Component{
                                                             <td>{el.FirstName} {el.LastName}</td>
                                                             <td>{el.ProgramName}</td>
                                                             <td>{el.Status==0?<span className='right badge badge-success'>Active</span>:<span className='right badge badge-danger'>Block</span>}</td>
-                                                            <td><Link to={"/manageCourse/update/"+el.CourseID}><i class="fas fa-edit"></i></Link></td>
+                                                            <td><Link to={"/updateCourse/"+el.CourseID}><i className="fas fa-edit"></i></Link></td>
                                                         </tr>
                                                         );
                                                     })}
@@ -100,5 +100,6 @@ class ManageCourse extends Component{
         )
     }
 }
+
 
 export default ManageCourse;
