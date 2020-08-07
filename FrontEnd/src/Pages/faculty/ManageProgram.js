@@ -3,28 +3,28 @@ import {Link} from "react-router-dom";
 import Navbar from '../../Components/Navbar1';
 import Sidebar from '../../Components/Sidebar2';
 import Footer from '../../Components/Footer4';
-import service_managecourse from "../../services/faculty/managecourse_service";
+import service_manageprogram from "../../services/faculty/manageprogram_service";
 
-class ManageCourse extends Component{
+class ManageProgram extends Component{
     constructor(props){
         super(props);
         this.state = {
-            course:[],
+            program:[],
         }
     }
    
     componentDidMount(){
         if(sessionStorage.getItem("email")!=null){
-            service_managecourse
-                .courseDetail(null)
+            service_manageprogram
+                .programDetail(null)
                 .then((res) => {
                     this.setState({
-                        course:res.data
+                        program:res.data
                     });
                 })
                 .catch((e) => {
                     var elem = document.getElementById("errorButton");
-                    elem.value="&nbsp;&nbsp;Some error occured getting courses"+e;
+                    elem.value="&nbsp;&nbsp;Some error occured getting programs"+e;
                     elem.click();
                 });
         }
@@ -43,12 +43,12 @@ class ManageCourse extends Component{
                         <div className="container-fluid">
                             <div className="row mb-2">
                                 <div className="col-sm-6">
-                                    <h1>Manage Course &nbsp;&nbsp;&nbsp;<Link to={"/insertCourse"}><button type="submit" className="btn btn-primary">Insert New</button></Link></h1>
+                                    <h1>Manage Program &nbsp;&nbsp;&nbsp;<Link to={"/insertProgram"}><button type="submit" className="btn btn-primary">Insert New</button></Link></h1>
                                 </div>
                                 <div className="col-sm-6">
                                     <ol className="breadcrumb float-sm-right">
                                         <li className="breadcrumb-item"><Link to={"/dashboard"}>Home</Link></li>
-                                        <li className="breadcrumb-item active">Manage Course</li>
+                                        <li className="breadcrumb-item active">Manage Program</li>
                                     </ol>
                                 </div>
                             </div>
@@ -64,24 +64,20 @@ class ManageCourse extends Component{
                                             <table className="table table-head-fixed text-nowrap table-hover">
                                                 <thead>
                                                     <tr>
-                                                        <th>Course Code</th>
-                                                        <th>Course Name</th>
-                                                        <th>Added By</th>
                                                         <th>Program Name</th>
+                                                        <th>Added By</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {this.state.course.map(el => {
+                                                    {this.state.program.map(el => {
                                                         return (
-                                                        <tr key={el.CourseID}>
-                                                            <td>{el.CourseCode}</td>
-                                                            <td>{el.CourseName}</td>
-                                                            <td>{el.FirstName} {el.LastName}</td>
+                                                        <tr key={el.ProgramID}>
                                                             <td>{el.ProgramName}</td>
+                                                            <td>{el.FirstName} {el.LastName}</td>
                                                             <td>{el.Status==0?<span className='right badge badge-success'>Active</span>:<span className='right badge badge-danger'>Block</span>}</td>
-                                                            <td><Link to={"/updateCourse/"+el.CourseID}><i className="fas fa-edit"></i></Link></td>
+                                                            <td><Link to={"/updateProgram/"+el.ProgramID}><i className="fas fa-edit"></i></Link></td>
                                                         </tr>
                                                         );
                                                     })}
@@ -102,4 +98,4 @@ class ManageCourse extends Component{
 }
 
 
-export default ManageCourse;
+export default ManageProgram;

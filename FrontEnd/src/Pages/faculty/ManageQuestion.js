@@ -3,28 +3,28 @@ import {Link} from "react-router-dom";
 import Navbar from '../../Components/Navbar1';
 import Sidebar from '../../Components/Sidebar2';
 import Footer from '../../Components/Footer4';
-import service_managecourse from "../../services/faculty/managecourse_service";
+import service_managequestion from "../../services/faculty/managequestion_service";
 
-class ManageCourse extends Component{
+class ManageQuestion extends Component{
     constructor(props){
         super(props);
         this.state = {
-            course:[],
+            question:[],
         }
     }
    
     componentDidMount(){
         if(sessionStorage.getItem("email")!=null){
-            service_managecourse
-                .courseDetail(null)
+            service_managequestion
+                .questionDetail(null)
                 .then((res) => {
                     this.setState({
-                        course:res.data
+                        question:res.data
                     });
                 })
                 .catch((e) => {
                     var elem = document.getElementById("errorButton");
-                    elem.value="&nbsp;&nbsp;Some error occured getting courses"+e;
+                    elem.value="&nbsp;&nbsp;Some error occured getting questions "+e;
                     elem.click();
                 });
         }
@@ -43,12 +43,12 @@ class ManageCourse extends Component{
                         <div className="container-fluid">
                             <div className="row mb-2">
                                 <div className="col-sm-6">
-                                    <h1>Manage Course &nbsp;&nbsp;&nbsp;<Link to={"/insertCourse"}><button type="submit" className="btn btn-primary">Insert New</button></Link></h1>
+                                    <h1>Manage Question &nbsp;&nbsp;&nbsp;<Link to={"/insertQuestion"}><button type="submit" className="btn btn-primary">Insert New</button></Link></h1>
                                 </div>
                                 <div className="col-sm-6">
                                     <ol className="breadcrumb float-sm-right">
                                         <li className="breadcrumb-item"><Link to={"/dashboard"}>Home</Link></li>
-                                        <li className="breadcrumb-item active">Manage Course</li>
+                                        <li className="breadcrumb-item active">Manage Question</li>
                                     </ol>
                                 </div>
                             </div>
@@ -64,24 +64,28 @@ class ManageCourse extends Component{
                                             <table className="table table-head-fixed text-nowrap table-hover">
                                                 <thead>
                                                     <tr>
-                                                        <th>Course Code</th>
-                                                        <th>Course Name</th>
+                                                        <th>Course code</th>
+                                                        <th>Course name</th>
+                                                        <th>Question</th>
+                                                        <th>Mark</th>
+                                                        <th>Level</th>
                                                         <th>Added By</th>
-                                                        <th>Program Name</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {this.state.course.map(el => {
+                                                    {this.state.question.map(el => {
                                                         return (
-                                                        <tr key={el.CourseID}>
+                                                        <tr key={el.QuestionID}>
                                                             <td>{el.CourseCode}</td>
                                                             <td>{el.CourseName}</td>
+                                                            <td>{el.Question.substring(0,20)}</td>
+                                                            <td>{el.Mark}</td>
+                                                            <td>{el.Level==1?<span className='right badge badge-success'>Easy</span>:el.Level==2?<span className='right badge badge-warning'>Medium</span>:<span className='right badge badge-danger'>Hard</span>}</td>
                                                             <td>{el.FirstName} {el.LastName}</td>
-                                                            <td>{el.ProgramName}</td>
                                                             <td>{el.Status==0?<span className='right badge badge-success'>Active</span>:<span className='right badge badge-danger'>Block</span>}</td>
-                                                            <td><Link to={"/updateCourse/"+el.CourseID}><i className="fas fa-edit"></i></Link></td>
+                                                            <td><Link to={"/updateQuestion/"+el.QuestionID}><i className="fas fa-edit"></i></Link></td>
                                                         </tr>
                                                         );
                                                     })}
@@ -102,4 +106,4 @@ class ManageCourse extends Component{
 }
 
 
-export default ManageCourse;
+export default ManageQuestion;

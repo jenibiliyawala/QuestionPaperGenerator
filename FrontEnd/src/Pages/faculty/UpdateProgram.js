@@ -3,55 +3,36 @@ import {Link} from "react-router-dom";
 import Navbar from '../../Components/Navbar1';
 import Sidebar from '../../Components/Sidebar2';
 import Footer from '../../Components/Footer4';
-import service_managecourse from "../../services/faculty/managecourse_service";
+import service_manageprogram from "../../services/faculty/manageprogram_service";
 
-class UpdateCourse extends React.Component{
+class UpdateProgram extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            allprograms:[],
-            coursecode:"",
-            coursename:"",
             programid:"",
             programname:"",
             status:"" ,
-            courseid:""     
         }
     }
 
-    //getting Course detail
+    //getting Program detail
     componentDidMount(){        
         if(sessionStorage.getItem("email")!=null){   
-            service_managecourse
-                .getallprograms(null)
-                .then((res) => {
-                    this.setState({
-                        allprograms:res.data
-                    });
-                })
-                .catch((e) => {
-                    var elem = document.getElementById("errorButton");
-                    elem.value="&nbsp;&nbsp;Some error occured getting all programs details"+e;
-                    elem.click();
-                });
-
             const data={  
-                CourseID:this.props.match.params.CourseID
+                ProgramID:this.props.match.params.ProgramID
             }
-            service_managecourse.selectedCourseDetail(data)
+            service_manageprogram.selectedProgramDetail(data)
                 .then((res) => {
                     this.setState({
-                        coursecode:res.data[0].CourseCode,
-                        coursename:res.data[0].CourseName,
-                        programid:res.data[0].ProgramID,
                         programname:res.data[0].ProgramName,
+                        programid:res.data[0].ProgramID,
                         status:res.data[0].Status
                     });
                 })
                 .catch((e) => {
-                    var elem = document.getElementById("errorButton");
-                    elem.value="&nbsp;&nbsp;Some error occured getting course details"+e;
-                    elem.click();
+                    // var elem = document.getElementById("errorButton");
+                    // elem.value="&nbsp;&nbsp;Some error occured getting program details"+e;
+                    // elem.click();
                 });
         }
     }
@@ -59,25 +40,23 @@ class UpdateCourse extends React.Component{
     onSubmit = (e)=>{
         e.preventDefault()
         const data={
-            coursecode: this.state.coursecode,
-            coursename:this.state.coursename,
-            programid:this.state.programid,
+            programname:this.state.programname,
             status:this.state.status,
-            courseid:this.props.match.params.CourseID,
+            programid:this.props.match.params.ProgramID,
         }
-        service_managecourse
-            .updatedcourse(data)
+        service_manageprogram
+            .updatedProgram(data)
             .then((res) =>
             {
-                this.props.history.push('/manageCourse');
-                var elem = document.getElementById("successButton");
-                elem.value="&nbsp;&nbsp;Course updated successfully";
-                elem.click();
+                this.props.history.push('/manageProgram');
+                // var elem = document.getElementById("successButton");
+                // elem.value="&nbsp;&nbsp;program updated successfully";
+                // elem.click();
             })
             .catch((e) => {
-                var elem = document.getElementById("errorButton");
-                elem.value="&nbsp;&nbsp;Some error occured updating course"+e;
-                elem.click();
+                // var elem = document.getElementById("errorButton");
+                // elem.value="&nbsp;&nbsp;Some error occured updating program"+e;
+                // elem.click();
             });
     }
 
@@ -95,13 +74,13 @@ class UpdateCourse extends React.Component{
                         <div className="container-fluid">
                             <div className="row mb-2">
                                 <div className="col-sm-6">
-                                    <h1>Update course</h1>
+                                    <h1>Update program</h1>
                                 </div>
                                 <div className="col-sm-6">
                                     <ol className="breadcrumb float-sm-right">
                                         <li className="breadcrumb-item"><Link to={"/dashboard"}>Home</Link></li>
-                                        <li className="breadcrumb-item"><Link to={"/manageCourse"}>Manage course</Link></li>
-                                        <li className="breadcrumb-item active">Update course</li>
+                                        <li className="breadcrumb-item"><Link to={"/manageProgram"}>Manage program</Link></li>
+                                        <li className="breadcrumb-item active">Update program</li>
                                     </ol>
                                 </div>
                             </div>
@@ -114,35 +93,13 @@ class UpdateCourse extends React.Component{
                                 <div className="col-md-10 offset-md-1">
                                     <div className="card card-primary">
                                         <div className="card-header">
-                                            <h3 className="card-title">Course Details</h3>
+                                            <h3 className="card-title">Program Details</h3>
                                         </div>
                                         <br></br>
                                         <form role="form" onSubmit={this.onSubmit}>
                                             <div className="card-body" style={{paddingTop:'0px'}}>
                                                 <div className="form-group">
-                                                    <label htmlFor="CourseCode">Course Code</label>
-                                                    <div className="input-group mb-3">
-                                                        <div className="input-group-prepend">
-                                                            <span className="input-group-text"><i className="fas fa-user-tie"></i></span>
-                                                        </div>
-                                                        <input 
-                                                            type="text" 
-                                                            className="form-control" 
-                                                            id="CourseCode" 
-                                                            placeholder="Enter Course Code" 
-                                                            name="coursecode" 
-                                                            required
-                                                            minLength="2"
-                                                            maxLength="100"
-                                                            title="Enter valid course code"
-                                                            defaultValue={this.state.coursecode || ''} 
-                                                            onChange={this.onChange.bind(this)}
-                                                        />
-                                                    </div>
-                                                </div>
-                                                
-                                                <div className="form-group">
-                                                    <label htmlFor="CourseName">Course name</label>
+                                                    <label htmlFor="ProgramName">Program name</label>
                                                     <div className="input-group mb-3">
                                                         <div className="input-group-prepend">
                                                             <span className="input-group-text"><i className="fas fa-user"></i></span>
@@ -150,34 +107,16 @@ class UpdateCourse extends React.Component{
                                                         <input 
                                                             type="text"
                                                             className="form-control" 
-                                                            id="CourseName" 
-                                                            name="coursename" 
+                                                            id="ProgramName" 
+                                                            name="programname" 
                                                             required
                                                             minLength="2"
                                                             maxLength="100"
-                                                            title="Enter valid course name"
-                                                            placeholder="Enter Course name"
-                                                            defaultValue={this.state.coursename || ''} 
+                                                            title="Enter valid program name"
+                                                            placeholder="Enter program name"
+                                                            defaultValue={this.state.programname || ''} 
                                                             onChange={this.onChange.bind(this)}
                                                         />
-                                                    </div>
-                                                </div>
-                                                <div className="form-group">
-                                                    <label htmlFor="exampleInputContactNo1">Program Name</label>
-                                                    <div className="input-group mb-3">
-                                                        <div className="input-group-prepend">
-                                                            <span className="input-group-text"><i className="fas fa-phone-alt"></i></span>
-                                                        </div>
-                                                        <select 
-                                                            onChange={this.handleChange} 
-                                                            name="programid" 
-                                                            value={this.state.programid || ''}
-                                                            onChange={this.onChange.bind(this)}
-                                                            defaultValue={this.state.programname || ''}
-                                                            className="form-control"  >
-                                                                {this.state.allprograms.map(iteratorvariable => {
-                                                                    return (<option key={iteratorvariable.ProgramID} value={iteratorvariable.ProgramID}>{iteratorvariable.ProgramName} </option>) })}
-                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div className="form-group">
@@ -233,4 +172,4 @@ class UpdateCourse extends React.Component{
     };
     handleChange = (event) => this.setState({programid: event.target.key, programname:event.target.value});
 }
-export default UpdateCourse;
+export default UpdateProgram;

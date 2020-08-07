@@ -5,7 +5,7 @@ import Sidebar from '../../Components/Sidebar2';
 import Footer from '../../Components/Footer4';
 import service_managecourse from "../../services/faculty/managecourse_service";
 
-class Home extends React.Component{
+class InsertCourse extends React.Component{
     constructor(props)
     {
         super(props);
@@ -41,7 +41,7 @@ class Home extends React.Component{
                     console.log(res.data[0].FacultyID);
                 })
             console.log(this.state.facultyid);
-            alert(this.state.facultyid);
+            // alert(this.state.facultyid);
         } 
     }
     
@@ -78,7 +78,7 @@ class Home extends React.Component{
                                 <div className="col-md-10 offset-md-1">
                                     <div className="card card-primary">
                                         <div className="card-header">
-                                            <h3 className="card-title">Quick Example</h3>
+                                            <h3 className="card-title">Insert course</h3>
                                         </div>
                                         <br></br>
                                         <form role="form" onSubmit={this.onSubmit}>
@@ -188,4 +188,4 @@ class Home extends React.Component{
             });
     }
 }
-export default Home;
+export default InsertCourse;

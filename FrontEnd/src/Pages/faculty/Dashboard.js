@@ -3,8 +3,53 @@ import {Link} from "react-router-dom";
 import Navbar from '../../Components/Navbar1';
 import Sidebar from '../../Components/Sidebar2';
 import Footer from '../../Components/Footer4';
+import service_dashboard from "../../services/faculty/dashboard_service";
 
 class Dashboard extends React.Component{
+    constructor(props)
+    {
+        super(props);
+        this.state = {
+            CountOfProgram:"",
+            CountOfCourse:"",
+            CountOfFaculty:"",
+            CountOfQuestion:"",
+        }
+    }
+
+    componentDidMount(){
+        if(sessionStorage.getItem("email")!=null){
+            service_dashboard
+                .getCountOfProgram(null)
+                .then((res) => {
+                    this.setState({
+                        CountOfProgram:res.data[0].Total
+                    });
+                })
+            service_dashboard
+                .getCountOfCourse(null)
+                .then((res) => {
+                    this.setState({
+                        CountOfCourse:res.data[0].Total
+                    });
+                })
+            service_dashboard
+                .getCountOfFaculty(null)
+                .then((res) => {
+                    this.setState({
+                        CountOfFaculty:res.data[0].Total
+                    });
+                })
+            service_dashboard
+                .getCountOfQuestion(null)
+                .then((res) => {
+                    this.setState({
+                        CountOfQuestion:res.data[0].Total
+                    });
+                })
+        } 
+    }
+
     render(){
         return (
             <div>
@@ -32,31 +77,31 @@ class Dashboard extends React.Component{
                                 <div className="col-lg-3 col-6">
                                     <div className="small-box bg-info">
                                         <div className="inner">
-                                            <h3>150</h3>
-                                            <p>Courses</p>
+                                            <h3>{this.state.CountOfProgram || ''}</h3>
+                                            <p>Program</p>
                                         </div>
                                         <div className="icon">
                                             <i className="ion ion-bag"></i>
                                         </div>
-                                        <a href="/manageCourse" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a>
+                                        <a href="/manageProgram" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a>
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col-6">
                                     <div className="small-box bg-success">
                                         <div className="inner">
-                                            <h3>53</h3>
-                                            <p>Subjects</p>
+                                            <h3>{this.state.CountOfCourse || ''}</h3>
+                                            <p>Courses</p>
                                         </div>
                                         <div className="icon">
                                             <i className="ion ion-stats-bars"></i>
                                         </div>
-                                        <a href="#" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a>
+                                        <a href="/manageCourse" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a>
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col-6">
                                     <div className="small-box bg-warning">
                                         <div className="inner">
-                                            <h3>44</h3>
+                                            <h3>{this.state.CountOfFaculty || ''}</h3>
                                             <p>Faculty Registrations</p>
                                         </div>
                                         <div className="icon">
@@ -68,13 +113,13 @@ class Dashboard extends React.Component{
                                 <div className="col-lg-3 col-6">
                                     <div className="small-box bg-danger">
                                         <div className="inner">
-                                            <h3>65</h3>
+                                            <h3>{this.state.CountOfQuestion || ''}</h3>
                                             <p>Total Questions</p>
                                         </div>
                                         <div className="icon">
                                             <i className="ion ion-pie-graph"></i>
                                         </div>
-                                        <a href="#" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a>
+                                        <a href="/manageQuestion" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a>
                                     </div>
                                 </div>
                                 <div className="col-lg-6 col-12" style={{paddingBottom:"15px"}}>

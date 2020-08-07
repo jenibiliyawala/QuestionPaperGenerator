@@ -7,6 +7,12 @@ import Login from './Pages/faculty/Login';
 import ManageCourse from './Pages/faculty/ManageCourse';
 import UpdateCourse from './Pages/faculty/UpdateCourse';
 import InsertCourse from './Pages/faculty/InsertCourse';
+import ManageProgram from './Pages/faculty/ManageProgram';
+import UpdateProgram from './Pages/faculty/UpdateProgram';
+import InsertProgram from './Pages/faculty/InsertProgram';
+import ManageQuestion from './Pages/faculty/ManageQuestion';
+import UpdateQuestion from './Pages/faculty/UpdateQuestion';
+import InsertQuestion from './Pages/faculty/InsertQuestion';
 
 import Temp from './Pages/faculty/Temp';
 
@@ -32,7 +38,13 @@ export default class App extends Component{
             <Route path={"/manageCourse"} component={ManageCourse} />
             <Route path={"/updateCourse/:CourseID"} component={UpdateCourse} />
             <Route path={"/insertCourse"} component={InsertCourse} />
-           
+            <Route path={"/manageProgram"} component={ManageProgram} />
+            <Route path={"/updateProgram/:ProgramID"} component={UpdateProgram} />
+            <Route path={"/insertProgram"} component={InsertProgram} />
+            <Route path={"/manageQuestion"} component={ManageQuestion} />
+            <Route path={"/updateQuestion/:QuestionID"} component={UpdateQuestion} />
+            <Route path={"/insertQuestion"} component={InsertQuestion} />
+            
             <Route path={"/contact"} component={Temp} />
           </Switch>
         </BrowserRouter>
