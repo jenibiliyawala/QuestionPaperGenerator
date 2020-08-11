@@ -38,10 +38,7 @@ class InsertCourse extends React.Component{
                     this.setState({
                         facultyid:res.data[0].FacultyID
                     });
-                    console.log(res.data[0].FacultyID);
                 })
-            console.log(this.state.facultyid);
-            // alert(this.state.facultyid);
         } 
     }
     

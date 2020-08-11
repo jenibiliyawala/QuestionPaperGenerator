@@ -13,6 +13,9 @@ import InsertProgram from './Pages/faculty/InsertProgram';
 import ManageQuestion from './Pages/faculty/ManageQuestion';
 import UpdateQuestion from './Pages/faculty/UpdateQuestion';
 import InsertQuestion from './Pages/faculty/InsertQuestion';
+import ManageFaculty from './Pages/faculty/ManageFaculty';
+import InsertFaculty from './Pages/faculty/InsertFaculty';
+import generateQuestionPaper from './Pages/faculty/GenerateQuestionPaper';
 
 import Temp from './Pages/faculty/Temp';
 
@@ -44,6 +47,9 @@ export default class App extends Component{
             <Route path={"/manageQuestion"} component={ManageQuestion} />
             <Route path={"/updateQuestion/:QuestionID"} component={UpdateQuestion} />
             <Route path={"/insertQuestion"} component={InsertQuestion} />
+            <Route path={"/manageFaculty"} component={ManageFaculty} />
+            <Route path={"/insertFaculty"} component={InsertFaculty} />
+            <Route path={"/generateQuestionPaper"} component={generateQuestionPaper} />
             
             <Route path={"/contact"} component={Temp} />
           </Switch>

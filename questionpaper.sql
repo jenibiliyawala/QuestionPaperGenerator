@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 19, 2020 at 04:35 PM
+-- Generation Time: Aug 07, 2020 at 09:38 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -53,7 +53,8 @@ INSERT INTO `tblcourse` (`CourseID`, `CourseCode`, `CourseName`, `AddedByFaculty
 (9, 'IT628', 'Systems Programming', 2, 1, 0),
 (10, 'IT629', 'Web Programming', 2, 1, 0),
 (11, 'IT123', 'Checking COurse', 1, 5, 0),
-(12, 'PC123', 'hello', 1, 3, 0);
+(12, 'PC123', 'hello', 1, 3, 1),
+(13, 'PC611', 'sd', 1, 11, 0);
 
 -- --------------------------------------------------------
 
@@ -108,7 +109,41 @@ INSERT INTO `tblprogram` (`ProgramID`, `ProgramName`, `AddedByFacultyID`, `Statu
 (7, 'M.Tech. (CSE)-Data Sciences', 2, 0),
 (8, 'M.Tech. (CSE)-Information Security', 3, 0),
 (9, 'M.Sc. (Data Science)', 3, 0),
-(10, 'M.Des. (Communication Design)', 1, 0);
+(10, 'M.Des. (Communication Design)', 1, 0),
+(11, 'abc123', 1, 0),
+(14, 'xyz', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblquestion`
+--
+
+CREATE TABLE `tblquestion` (
+  `QuestionID` int(11) NOT NULL,
+  `CourseID` int(11) NOT NULL,
+  `Question` varchar(2000) NOT NULL,
+  `Mark` int(11) NOT NULL,
+  `Level` int(11) NOT NULL,
+  `AddedByFacultyID` int(11) NOT NULL,
+  `Status` int(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblquestion`
+--
+
+INSERT INTO `tblquestion` (`QuestionID`, `CourseID`, `Question`, `Mark`, `Level`, `AddedByFacultyID`, `Status`) VALUES
+(1, 1, 'What is binary tree?', 1, 1, 1, 0),
+(2, 1, 'Explain binary search.', 7, 2, 1, 0),
+(3, 3, 'what is BCNF?', 5, 3, 2, 0),
+(4, 2, 'abc', 4, 2, 1, 0),
+(5, 4, 'abcd', 4, 3, 1, 0),
+(6, 2, 'qa', 1, 1, 1, 0),
+(7, 1, 'jk', 3, 1, 1, 0),
+(8, 7, 'oooooops', 7, 3, 1, 0),
+(9, 1, 'gghfbvcx dfxdzfc dfxczcsdxz dfxzc ddfxczcsdzx dszxc dsxz sdzxc dsx cdsxzc', 1, 2, 1, 0),
+(10, 1, 'temptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptempv', 1, 1, 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -130,7 +165,14 @@ ALTER TABLE `tblfaculty`
 -- Indexes for table `tblprogram`
 --
 ALTER TABLE `tblprogram`
-  ADD PRIMARY KEY (`ProgramID`);
+  ADD PRIMARY KEY (`ProgramID`),
+  ADD UNIQUE KEY `ProgramName` (`ProgramName`);
+
+--
+-- Indexes for table `tblquestion`
+--
+ALTER TABLE `tblquestion`
+  ADD PRIMARY KEY (`QuestionID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -140,7 +182,7 @@ ALTER TABLE `tblprogram`
 -- AUTO_INCREMENT for table `tblcourse`
 --
 ALTER TABLE `tblcourse`
-  MODIFY `CourseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `CourseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tblfaculty`
@@ -152,7 +194,13 @@ ALTER TABLE `tblfaculty`
 -- AUTO_INCREMENT for table `tblprogram`
 --
 ALTER TABLE `tblprogram`
-  MODIFY `ProgramID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ProgramID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `tblquestion`
+--
+ALTER TABLE `tblquestion`
+  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

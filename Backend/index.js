@@ -12,7 +12,9 @@ const facultyDetail = require('./routes/faculty/profile_Route');
 const manageCourse = require('./routes/faculty/managecourse_Route');
 const manageProgram = require('./routes/faculty/manageprogram_Route');
 const manageQuestion = require('./routes/faculty/managequestion_Route');
+const manageFaculty = require('./routes/faculty/managefaculty_Route');
 const dashboard = require('./routes/faculty/dashboard_Route');
+const GenerateQuestionPaper = require('./routes/faculty/generateQuestionPaper_Route');
 
 app.use(cors());
 app.use(morgan('combined'));
@@ -25,7 +27,9 @@ app.use(facultyDetail);
 app.use(manageCourse);
 app.use(manageProgram);
 app.use(manageQuestion);
+app.use(manageFaculty);
 app.use(dashboard);
+app.use(GenerateQuestionPaper);
 
 //for getting images and other resources
 app.use(express.static(__dirname));

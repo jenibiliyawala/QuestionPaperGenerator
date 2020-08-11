@@ -40,6 +40,10 @@ class Navbar1 extends React.Component{
                             <Link to={"/contact"} activestyle={{color:'red'}} className="nav-link">Contact</Link>
                             {/* <a href="#" className="nav-link">Contact</a> */}
                         </li>
+                        <li className="nav-item d-none d-sm-inline-block">
+                            <Link to={"/generateQuestionPaper"} activestyle={{color:'red'}} className="nav-link">Generate Question Paper</Link>
+                            {/* <a href="#" className="nav-link">Contact</a> */}
+                        </li>
                     </ul>
 
                     {/* Right navbar links */}

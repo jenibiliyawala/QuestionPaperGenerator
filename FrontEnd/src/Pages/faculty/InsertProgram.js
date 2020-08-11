@@ -5,7 +5,7 @@ import Sidebar from '../../Components/Sidebar2';
 import Footer from '../../Components/Footer4';
 import service_manageprogram from "../../services/faculty/manageprogram_service";
 
-class Home extends React.Component{
+class InsertProgram extends React.Component{
     constructor(props)
     {
         super(props);
@@ -128,4 +128,4 @@ class Home extends React.Component{
             });
     }
 }
-export default Home;
+export default InsertProgram;
