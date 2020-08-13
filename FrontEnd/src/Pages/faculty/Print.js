@@ -25,7 +25,7 @@ class Print extends Component{
                     level:this.state.level,
                     mark:Cookies.get("Mark"+count),
                     questions:Cookies.get("NoOfQuestions"+count),
-                }    
+                }
                 service_print
                     .getQuestions(data)
                     .then((res) => {
@@ -35,10 +35,14 @@ class Print extends Component{
                     })
                 count++;
             }
+            // var elem = document.getElementById("btnPrint");
+            // elem.click();
+        
         } 
     }
 
     render(){
+        var index=0;
         var count=1;
         var cnt=1;
         return(
@@ -81,28 +85,30 @@ class Print extends Component{
                     {
                         this.state.questions.map(q => {
                             cnt=1;
-                            return (
-                                <div>
-                                    <div className="row">
-                                        <div className="col-11">
-                                            <h4>Q.{count++} Answer the following questions. ({Cookies.get("Mark"+(count-2))} marks each)</h4>
-                                        </div>
-                                        <div className="col-1">
-                                            <h4>({Cookies.get("Mark"+(count-2))*Cookies.get("NoOfQuestions"+(count-2))})</h4>
-                                        </div>
-                                        <div className="col-12">
-                                        {
-                                            q.map(el => {
-                                                return (
-                                                    <h5>{cnt++}. {el.Question}</h5>
-                                                )
-                                            })
-                                        }
-                                        </div>
-                                    </div><br/>
-                                </div>
-                            ) 
-                            count++;
+                            if(q.length>0)
+                            {
+                                return (
+                                    <div>
+                                        <div className="row">
+                                            <div className="col-11">
+                                                <h4>Q.{count++} Answer the following questions. ({q[0].Mark} marks each)</h4>
+                                            </div>
+                                            <div className="col-1">
+                                                <h4>({q[0].Mark*q.length})</h4>
+                                            </div>
+                                            <div className="col-12">
+                                            {
+                                                q.map(el => {
+                                                    return (
+                                                        <h5>{cnt++}. {el.Question}</h5>
+                                                    )
+                                                })
+                                            }
+                                            </div>
+                                        </div><br/>
+                                    </div>
+                                )
+                            }
                         })
                     }
                 </section>
