@@ -14,7 +14,7 @@ var item = {
         return db.query('INSERT INTO tblquestion(CourseID, Question, Mark, Level, AddedByFacultyID) VALUES (?,?,?,?,?) ',[item.courseid,item.question,item.mark,item.level,item.facultyid],callback);
     },
     getAllCourses(item,callback){
-        return db.query('SELECT CourseID, CourseCode, CourseName FROM tblcourse',callback)
+        return db.query('SELECT CourseID, CourseCode, CourseName FROM tblcourse WHERE Status="0"',callback)
     },
     getFacultyID(item,callback){
         return db.query('SELECT FacultyID FROM tblfaculty WHERE Email=?',[item.FacultyEmail],callback)

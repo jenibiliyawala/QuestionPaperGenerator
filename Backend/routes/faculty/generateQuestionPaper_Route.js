@@ -27,8 +27,8 @@ router.post('/GQPGetQuestions', (req, res, next) => {
     });
 });
 
-/*router.post('/generatequestionpaper/getCountOfFaculty', (req, res, next) => {
-    generatequestionpaper.CountOfFaculty(req.body, (err, row) => {
+router.post('/print/getQuestion', (req, res, next) => { //for print
+    generatequestionpaper.printGetQuestions(req.body, (err, row) => {
         if (err) {
             res.send(err);
         }
@@ -36,7 +36,7 @@ router.post('/GQPGetQuestions', (req, res, next) => {
             res.json(row);
         }
     });
-});*/
+});
 
 /*router.post('/generatequestionpaper/getCountOfQuestion', (req, res, next) => {
     generatequestionpaper.CountOfQuestion(req.body, (err, row) => {

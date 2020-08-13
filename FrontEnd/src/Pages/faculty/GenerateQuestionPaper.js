@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Cookies from 'js-cookie';
 import {Link} from "react-router-dom";
 import Navbar from '../../Components/Navbar1';
 import Sidebar from '../../Components/Sidebar2';
@@ -13,7 +14,7 @@ class GenerateQuestionPaper extends React.Component{
             allcourses:[],
             courseid:"1",
             level:"2",
-            totalmark:"100",
+            totalmark:"10",
             total:"0",
             date:"",
             duration:"",
@@ -380,16 +381,34 @@ class GenerateQuestionPaper extends React.Component{
             facultyid:this.state.facultyid,
             programname:this.state.programname,
         }
+            
+        Cookies.remove('courseid');
+        Cookies.remove('level');
+        Cookies.remove('total');
+        Cookies.remove('date');
+        Cookies.remove('duration');
+        Cookies.remove('otherinstruction');
+        
+        for(let i=0;i<10;i++){
+            Cookies.remove('Mark'+i);
+            Cookies.remove('NoOfQuestions'+i);
+        }
 
-    /*    service_manageprogram
-            .addedProgram(data)
-            .then((res) =>
-            {
-                this.props.history.push('/manageProgram');
-            })
-            .catch((e) => {
-                alert("Some error occured Adding program "+e);
-            });*/
+        Cookies.set('courseid',this.state.courseid);
+        Cookies.set('level',this.state.level);
+        Cookies.set('total',this.state.total);
+        Cookies.set('date',this.state.date);
+        Cookies.set('duration',this.state.duration);
+        Cookies.set('otherinstruction',this.state.otherinstruction);
+        
+        let count=0;
+        this.state.noofquestions.forEach(element => {
+            Cookies.set('Mark'+count,element.Mark);
+            Cookies.set('NoOfQuestions'+count,element.Questions);
+            count++;        
+        });
+        
+        this.props.history.push('/Print');
     }
 }
 export default GenerateQuestionPaper;

@@ -16,6 +16,7 @@ import InsertQuestion from './Pages/faculty/InsertQuestion';
 import ManageFaculty from './Pages/faculty/ManageFaculty';
 import InsertFaculty from './Pages/faculty/InsertFaculty';
 import generateQuestionPaper from './Pages/faculty/GenerateQuestionPaper';
+import Print from './Pages/faculty/Print';
 
 import Temp from './Pages/faculty/Temp';
 
@@ -50,6 +51,7 @@ export default class App extends Component{
             <Route path={"/manageFaculty"} component={ManageFaculty} />
             <Route path={"/insertFaculty"} component={InsertFaculty} />
             <Route path={"/generateQuestionPaper"} component={generateQuestionPaper} />
+            <Route path={"/Print"} component={Print} />
             
             <Route path={"/contact"} component={Temp} />
           </Switch>

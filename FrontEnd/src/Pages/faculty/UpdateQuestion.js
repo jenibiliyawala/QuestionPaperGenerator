@@ -223,6 +223,35 @@ class UpdateQuestion extends React.Component{
                                                     </div>
                                                 </div>
 
+                                                <div className="form-group">
+                                                    <label htmlFor="status">Status</label>
+                                                    <div className="input-group mb-3">
+                                                        <div className="input-group-prepend">
+                                                            <span className="input-group-text"><i className="fas fa-ban"></i></span>
+                                                        </div>&nbsp;&nbsp;
+                                                        <input 
+                                                            type="radio" 
+                                                            id="block"
+                                                            placeholder="Enter Status"
+                                                            name="status"
+                                                            value="1"
+                                                            checked={this.state.status == "1"}
+                                                            onChange={this.onChange.bind(this)}
+                                                            style={{height:'1.5em',width:'1.5em'}}
+                                                        />&nbsp;<label> Block </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <input 
+                                                            type="radio" 
+                                                            id="unblock" 
+                                                            placeholder="Enter Status" 
+                                                            name="status"
+                                                            value="0" 
+                                                            checked={this.state.status == "0"}
+                                                            onChange={this.onChange.bind(this)}
+                                                            style={{height:'1.5em',width:'1.5em'}}
+                                                        />&nbsp;<label> Unblock </label>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                             <div className="card-footer">
                                                 <button type="submit" className="btn btn-primary">Update</button>
