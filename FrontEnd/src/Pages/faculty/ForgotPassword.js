@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
+// import {Link} from "react-router-dom";
 import service_signin from "../../services/faculty/signin_service";
 
 class Login extends Component{
+
     constructor(props)
     {
         super(props);
-        if(sessionStorage.getItem("email")!=null){
-            this.props.history.push('/dashboard');
-        }
         this.state={
             email:'',
             password:''
@@ -46,56 +45,14 @@ class Login extends Component{
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="input-group mb-3">
-                                        <input 
-                                            type="password" 
-                                            className="form-control" 
-                                            name="password"
-                                            required
-                                            v-model="pwd"
-                                            maxLength="30"
-                                            minLength="8"
-                                            pattern="[a-zA-Z0-9_@$~.,()=+*^%#!\/?><-]*"
-                                            title="Only Numbers,characters and (_@$~.,()=+*^%#!\/?><-) are allowed"
-                                            placeholder="Password"
-                                            onChange={this.onChange}
-                                        />
-                                        <div className="input-group-append">
-                                            <div className="input-group-text">
-                                                <span className="fas fa-lock"></span>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div className="row">
-                                        <div className="col-8">
-                                            <a href="/ForgotPassword">I forgot my password</a>
-                                            {/* <div className="icheck-primary">
-                                                <input 
-                                                    type="checkbox" 
-                                                    name="rememberme"
-                                                    id="remember"
-                                                    v-model="checkbox1"
-                                                    value="yes"
-                                                />
-                                                <label htmlFor="remember">
-                                                    Remember Me
-                                                </label>
-                                            </div> */}
-                                        </div>
                                         {/* /.col */}
-                                        <div className="col-4">
-                                            <button type="submit" className="btn btn-primary btn-block">Sign In</button>
+                                        <div className="col-6">
+                                            <button type="submit" className="btn btn-primary btn-block">Get password</button>
                                         </div>
                                         {/* /.col */}
                                     </div>
                                 </form>
-
-                                {/* <p className="mb-1"> */}
-                                    
-                                {/* </p> */}
-                                {/* <p className="mb-0"> */}
-                                    {/* <a href="register.html" className="text-center">Register a new membership</a> */}
-                                {/* </p> */}
                             </div>
                             {/* /.login-card-body */}
                         </div>
@@ -114,32 +71,28 @@ class Login extends Component{
         e.preventDefault()
         const data={
             email: this.state.email,
-            password:this.state.password
-        }    
+           // password:this.state.password
+        }  
         service_signin
-            .sin(data)
-            .then((res) => {
+            .forgot(data)
+            .then((res)=>{  
                 var resdata = res.data;
                 if (resdata.result == -1) {
                     var elem = document.getElementById("errorButton");
-                    elem.value="&nbsp;&nbsp;Invalid Username or Password..!";
+                    elem.value="&nbsp;&nbsp;Error occured or email doesnot exist..!";
                     elem.click();
                 }
-                else if (resdata.result == -2) {
-                    var elem = document.getElementById("errorButton");
-                    elem.value="&nbsp;&nbsp;Sorry, You were blocked..!";
-                    elem.click();
-                }
-                else{
+                else if (resdata.result == 1) {
                     var elem = document.getElementById("successButton");
-                    elem.value="&nbsp;&nbsp;Welcome "+this.state.email;
+                    elem.value="&nbsp;&nbsp;Mail sent successfully..!";
                     elem.click();
-                    window.sessionStorage.setItem("email",this.state.email);
-                    this.props.history.push('/dashboard');
+                    this.props.history.push('/login');
                 }
             })
             .catch((e) => {
-                alert("Some error occured.");
+                var elem = document.getElementById("successButton");
+                elem.value="&nbsp;&nbsp;Some error occured during the mail transfer..!";
+                elem.click();
             });
     }
 }

@@ -14,7 +14,7 @@ class GenerateQuestionPaper extends React.Component{
             allcourses:[],
             courseid:"1",
             level:"2",
-            totalmark:"10",
+            totalmark:"0",
             total:"0",
             date:"",
             duration:"",

@@ -23,6 +23,30 @@ router.post('/profile', (req, res, next) => {
     });
 });
 
+//get password
+router.post('/profile/getPassword', (req, res, next) => {
+    profile.getPassword(req.body, (err, row) => {
+        if (err) {
+            res.send(err);
+        }
+        else {
+            res.json(row);
+        }
+    });
+});
+
+//change password
+router.post('/profile/updatePassword', (req, res, next) => {
+    profile.changePassword(req.body, (err, row) => {
+        if (err) {
+            res.send(err);
+        }
+        else {
+            res.json(row);
+        }
+    });
+});
+
 //To update profile details
 router.post('/profile/updateProfile', (req, res, next) => {
     signin.isauth1(req.body, (err, row) => {

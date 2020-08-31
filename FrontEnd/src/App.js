@@ -15,8 +15,10 @@ import UpdateQuestion from './Pages/faculty/UpdateQuestion';
 import InsertQuestion from './Pages/faculty/InsertQuestion';
 import ManageFaculty from './Pages/faculty/ManageFaculty';
 import InsertFaculty from './Pages/faculty/InsertFaculty';
-import generateQuestionPaper from './Pages/faculty/GenerateQuestionPaper';
+import GenerateQuestionPaper from './Pages/faculty/GenerateQuestionPaper';
+import ForgotPassword from './Pages/faculty/ForgotPassword';
 import Print from './Pages/faculty/Print';
+import ChangePassword from './Pages/faculty/ChangePassword';
 
 import Temp from './Pages/faculty/Temp';
 
@@ -50,9 +52,11 @@ export default class App extends Component{
             <Route path={"/insertQuestion"} component={InsertQuestion} />
             <Route path={"/manageFaculty"} component={ManageFaculty} />
             <Route path={"/insertFaculty"} component={InsertFaculty} />
-            <Route path={"/generateQuestionPaper"} component={generateQuestionPaper} />
+            <Route path={"/generateQuestionPaper"} component={GenerateQuestionPaper} />
+            <Route path={"/ForgotPassword"} component={ForgotPassword} />
             <Route path={"/Print"} component={Print} />
-            
+            <Route path={"/ChangePassword"} component={ChangePassword} />
+                       
             <Route path={"/contact"} component={Temp} />
           </Switch>
         </BrowserRouter>
