@@ -7,6 +7,9 @@ var item={
             auth: {
                 user: 'jvquestionpaper123@gmail.com',
                 pass: 'jvdaiict@123'
+            },
+            tls:{
+                rejectUnauthorised:false
             }
         });
 

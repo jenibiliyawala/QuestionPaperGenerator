@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 13, 2020 at 09:12 AM
+-- Generation Time: Sep 09, 2020 at 12:39 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -52,9 +52,9 @@ INSERT INTO `tblcourse` (`CourseID`, `CourseCode`, `CourseName`, `AddedByFaculty
 (8, 'IT632', 'Software Engineering', 2, 1, 0),
 (9, 'IT628', 'Systems Programming', 2, 1, 0),
 (10, 'IT629', 'Web Programming', 2, 1, 0),
-(11, 'IT123', 'Checking COurse', 1, 5, 0),
-(12, 'PC123', 'hello', 1, 3, 1),
-(13, 'PC611', 'sd', 1, 11, 0);
+(11, 'IT627', 'Cloud Computing', 1, 1, 0),
+(12, 'IT619', 'Design of Software Systems', 1, 1, 0),
+(13, 'IT618', 'Enterprise Computing', 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -79,13 +79,13 @@ CREATE TABLE `tblfaculty` (
 --
 
 INSERT INTO `tblfaculty` (`FacultyID`, `Email`, `FirstName`, `LastName`, `Password`, `Image`, `ContactNo`, `Status`, `BlockedByFacultyID`) VALUES
-(1, 'jenibiliyawala@yahoo.com', 'Jeni', 'Biliyawala', 'jeni@1234', 'Faculty_1591460814284.JPG', '9374413322', 0, 0),
+(1, 'jenibiliyawala@yahoo.com', 'Jeni', 'Biliyawala', 'jeni@12345', 'Faculty_1591460814284.JPG', '9374413322', 0, 0),
 (2, 'vibhuti@vasani.com', 'Vibhuti', 'Vasani', 'Vibhuti@vasani', 'V.svg', '9876543210', 0, 0),
 (3, 'jeni@patel.com', 'Jeni', 'patel', 'jeni@patel', 'J.svg', '7383553322', 1, 1),
 (4, 'jeni@gmail.com', 'Jenish', 'Patel', 'jenish@12345', 'Faculty_1597153115506.jpg', '9765432132', 0, 0),
-(5, 'abc@xyz.com', 'abc', 'xyz', '12345678', 'A.svg', '1234567987', 0, 0),
-(6, 'abc@xyz.pqr', 'jasjhaskj', 'sdxzz', '4654646546546', 'J.svg', '9374413320', 0, 0),
-(7, 'abc@xyz.pqrs', 'adszx', 'dsazx', 'dzxcsdzxccsx', 'Faculty_1597153555014.jpg', '8675432186', 0, 0);
+(5, 'pintu@gmail.com', 'Pintu', 'jariwala', '12345678', 'P.svg', '1234567987', 0, 0),
+(6, 'pankaj@gmail.com', 'pankaj', 'roy', '4654646546546', 'P.svg', '9374413320', 0, 0),
+(7, 'swati@gmail.com', 'Swati', 'rajput', 'dzxcsdzxccsx', 'Faculty_1597153555014.jpg', '8675432186', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -115,8 +115,8 @@ INSERT INTO `tblprogram` (`ProgramID`, `ProgramName`, `AddedByFacultyID`, `Statu
 (8, 'M.Tech. (CSE)-Information Security', 3, 0),
 (9, 'M.Sc. (Data Science)', 3, 0),
 (10, 'M.Des. (Communication Design)', 1, 0),
-(11, 'abc123', 1, 0),
-(14, 'xyz', 1, 0);
+(11, 'MCA', 1, 1),
+(14, 'BCA\r\n', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -141,43 +141,20 @@ CREATE TABLE `tblquestion` (
 INSERT INTO `tblquestion` (`QuestionID`, `CourseID`, `Question`, `Mark`, `Level`, `AddedByFacultyID`, `Status`) VALUES
 (1, 1, 'What is binary tree?', 1, 1, 1, 0),
 (2, 1, 'Explain binary search.7', 7, 2, 1, 1),
-(3, 3, 'what is BCNF?', 5, 3, 2, 0),
-(4, 2, 'abc', 4, 2, 1, 0),
-(5, 4, 'abcd', 4, 3, 1, 0),
-(6, 2, 'qa', 1, 1, 1, 0),
-(7, 1, 'jk', 3, 1, 1, 0),
-(8, 7, 'oooooops', 7, 3, 1, 0),
-(9, 1, '1gghfbvcx dfxdzfc dfxczcsdxz dfxzc ddfxczcsdzx dszxc dsxz sdzxc dsx cdsxzc', 1, 2, 1, 0),
-(10, 1, 'temptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptemptempv', 1, 1, 1, 0),
-(11, 1, 'abc1', 1, 2, 1, 0),
-(12, 1, 'abc1', 1, 2, 1, 0),
-(13, 1, 'adbc1', 1, 2, 1, 0),
-(14, 1, 'abdc1', 1, 2, 1, 0),
-(15, 1, 'aabc1', 1, 2, 1, 0),
-(16, 1, 'azxcbc1', 1, 2, 1, 0),
-(17, 1, 'abasc3', 3, 2, 1, 0),
-(18, 1, 'asadbc3', 3, 2, 1, 0),
-(19, 1, 'aasbc3', 3, 2, 1, 0),
-(20, 1, 'aascbc3', 3, 2, 1, 0),
-(21, 1, 'abdfc3', 3, 2, 1, 0),
-(22, 1, 'awsbc1', 1, 2, 1, 0),
-(23, 1, 'awebc1', 1, 2, 1, 0),
-(24, 1, 'rtrtabc5', 5, 2, 1, 0),
-(25, 1, 'abyutc5', 5, 2, 1, 0),
-(26, 1, 'abyuic5', 5, 2, 1, 0),
-(27, 1, 'aiybc5', 5, 2, 1, 0),
-(28, 1, 'abhc5', 5, 2, 1, 0),
-(29, 1, 'abck5', 5, 2, 1, 0),
-(30, 1, 'agjbc7', 7, 2, 1, 0),
-(31, 1, 'auyibc7', 7, 2, 1, 0),
-(32, 1, 'abyujc7', 7, 2, 1, 0),
-(33, 1, 'akyubc7', 7, 2, 1, 0),
-(34, 1, 'abyuc7', 7, 2, 1, 0),
-(35, 1, 'atyujbc7', 7, 2, 1, 0),
-(36, 1, 'yjhgabc7', 7, 2, 1, 0),
-(37, 1, 'ajngbc7', 7, 2, 1, 0),
-(38, 1, 'abvjc7', 7, 2, 1, 0),
-(39, 1, 'abdfc7', 7, 2, 1, 0);
+(3, 3, 'what is BCNF?', 5, 3, 1, 0),
+(4, 1, 'Find the complexity of the bubble sort with explanation', 5, 2, 1, 0),
+(5, 1, 'Explain prim\'s algorithm', 7, 2, 1, 0),
+(6, 1, 'Queue and stack implementations using linked lists and arrays\r\n', 5, 2, 1, 0),
+(7, 1, 'Write a program fibonncaci series', 1, 2, 1, 0),
+(8, 1, 'Find Complexity of the selection sort in worst case', 7, 2, 1, 0),
+(9, 1, 'List all the sorting method', 15, 2, 1, 0),
+(10, 1, 'Check whether program is BST or not?', 15, 2, 1, 0),
+(11, 1, 'Deletion of the Tree', 15, 2, 1, 0),
+(12, 1, 'What are the various operations that can be performed on different Data Structures?', 7, 2, 1, 0),
+(13, 1, 'How is an Array different from Linked List?', 15, 2, 1, 0),
+(14, 1, 'What are Infix, prefix, Postfix notations?', 3, 2, 1, 0),
+(15, 1, 'Which data structures are used for BFS and DFS of a graph?', 15, 2, 1, 0),
+(16, 1, 'Can doubly linked be implemented using a single pointer variable in every node?\r\n', 15, 2, 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -234,7 +211,7 @@ ALTER TABLE `tblprogram`
 -- AUTO_INCREMENT for table `tblquestion`
 --
 ALTER TABLE `tblquestion`
-  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
